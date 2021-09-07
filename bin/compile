@@ -64,19 +64,19 @@ if [[ -f "$BUILD_DIR/luarocks.txt" ]]; then
   fi
 fi
 
-if [[ -f "$CACHE_DIR/GeoLite2-Country.tar.gz" ]]; then
-  echo "-----> Installing cached GeoLite2-Country database ..."
-  tar -zxf "$CACHE_DIR/GeoLite2-Country.tar.gz" --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
-  mv GeoLite2-Country_*/GeoLite2-Country.mmdb "$BUILD_DIR/conf/"
-else
-  if [[ -f $BUILD_DIR/conf/maxmind.key ]]; then
-    echo "-----> Downloading GeoLite2-Country database ..."
-    MAXMIND_KEY=$(cat "$BUILD_DIR/conf/maxmind.key")
-    curl -o "GeoLite2-Country.tar.gz" "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=$MAXMIND_KEY&suffix=tar.gz"
-    tar -zxf "GeoLite2-Country.tar.gz" --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
-    mv GeoLite2-Country_*/GeoLite2-Country.mmdb "$BUILD_DIR/conf/"
-  fi
-fi
+#if [[ -f "$CACHE_DIR/GeoLite2-Country.tar.gz" ]]; then
+#  echo "-----> Installing cached GeoLite2-Country database ..."
+#  tar -zxf "$CACHE_DIR/GeoLite2-Country.tar.gz" --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+#  mv GeoLite2-Country_*/GeoLite2-Country.mmdb "$BUILD_DIR/conf/"
+#else
+#  if [[ -f $BUILD_DIR/conf/maxmind.key ]]; then
+#    echo "-----> Downloading GeoLite2-Country database ..."
+#    MAXMIND_KEY=$(cat "$BUILD_DIR/conf/maxmind.key")
+#    curl -o "GeoLite2-Country.tar.gz" "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=$MAXMIND_KEY&suffix=tar.gz"
+#    tar -zxf "GeoLite2-Country.tar.gz" --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+#    mv GeoLite2-Country_*/GeoLite2-Country.mmdb "$BUILD_DIR/conf/"
+#  fi
+#fi
 
 rm -f /app/openresty
 export PATH="$OLD_PATH"
