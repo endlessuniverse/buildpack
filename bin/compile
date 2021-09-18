@@ -9,6 +9,10 @@ ENV_DIR="$3"
 
 echo "-----> Installing Zstandard ..."
 tar -zxf dist/zstd.tgz -C "$BUILD_DIR"
+cat << "EOF" > "$BUILD_DIR/.profile.d/zstd.sh"
+export PATH="$PATH:$HOME/zstd/bin"
+EOF
+chmod +x "$BUILD_DIR/.profile.d/zstd.sh"
 
 echo "-----> Installing OpenResty ..."
 tar -zxf dist/openresty.tgz -C "$BUILD_DIR"
@@ -17,7 +21,6 @@ cp -a bin/startopenresty "$BUILD_DIR/openresty/bin"
 fold -w 100 -s < "$BUILD_DIR/openresty/openresty-V.txt" | pr -to 7
 
 # Add a profile.d script to add openresty tools and luarocks to PATH
-mkdir -p "$BUILD_DIR/.profile.d"
 cat << "EOF" > "$BUILD_DIR/.profile.d/000-openresty-path.sh"
 export PATH="$PATH:$HOME/openresty/bin:$HOME/openresty/luarocks/bin:$HOME/openresty/luajit/bin:$HOME/openresty/nginx/sbin"
 EOF
