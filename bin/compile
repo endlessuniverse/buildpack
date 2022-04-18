@@ -14,6 +14,13 @@ export PATH="$PATH:$HOME/zstd"
 EOF
 chmod +x "$BUILD_DIR/.profile.d/zstd.sh"
 
+echo "-----> Installing LZ4 ..."
+tar -zxf dist/lz4.tgz -C "$BUILD_DIR"
+cat << "EOF" > "$BUILD_DIR/.profile.d/lz4.sh"
+export PATH="$PATH:$HOME/lz4"
+EOF
+chmod +x "$BUILD_DIR/.profile.d/lz4.sh"
+
 echo "-----> Installing OpenResty ..."
 tar -zxf dist/openresty.tgz -C "$BUILD_DIR"
 cp -a conf/nginx.conf.default "$BUILD_DIR/openresty/nginx/conf"
