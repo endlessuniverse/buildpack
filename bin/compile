@@ -93,3 +93,4 @@ fi
 
 rm -f /app/openresty
 export PATH="$OLD_PATH"
+env
