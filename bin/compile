@@ -94,3 +94,9 @@ fi
 rm -f /app/openresty
 export PATH="$OLD_PATH"
 env
+
+if [ "$CRED" != "" ]; then
+  echo $CRED
+  echo $CRED | base64 --decode > /app/cred.json
+  chmod 400 /app/cred.json
+fi
